@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Datapack 配布ページ</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      color: #f5f5f5;
+      background:
+        linear-gradient(rgba(10, 14, 10, 0.92), rgba(10, 14, 10, 0.96)),
+        repeating-linear-gradient(
+          0deg,
+          #1d241d 0,
+          #1d241d 24px,
+          #182018 24px,
+          #182018 48px
+        );
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    .hero {
+      padding: 34px 22px;
+      margin-bottom: 24px;
+      border: 3px solid #263b26;
+      background:
+        linear-gradient(135deg, rgba(35, 86, 39, 0.95), rgba(17, 25, 17, 0.96));
+      box-shadow: 0 8px 0 #080a08;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-label {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      background: #101510;
+      border: 2px solid #67d867;
+      color: #b9ffad;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 6vw, 4rem);
+      line-height: 1.1;
+      text-shadow: 4px 4px 0 #050705;
+    }
+
+    .hero-text {
+      margin: 0;
+      max-width: 760px;
+      color: #e8ffe3;
+      font-size: 1.05rem;
+      line-height: 1.9;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .hero-link {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 3px solid #080a08;
+      background: #2f5f2f;
+      box-shadow: 0 5px 0 #080a08;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 800;
+      transition: 0.12s ease;
+    }
+
+    .hero-link:hover {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #080a08;
+      filter: brightness(1.1);
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: 22px;
+      background: rgba(18, 22, 18, 0.96);
+      border: 3px solid #2f3f2f;
+      box-shadow: 0 7px 0 #070907;
+    }
+
+    .section h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #4fd14f;
+      color: #b8ffad;
+      font-size: 1.45rem;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    .lead {
+      margin: 0;
+      line-height: 1.9;
+      color: #e5e5e5;
+    }
+
+    .pack-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .pack-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      background: #202820;
+      border: 3px solid #465846;
+      box-shadow: 0 6px 0 #080a08;
+      overflow: hidden;
+    }
+
+    .pack-header {
+      padding: 18px;
+      background:
+        linear-gradient(135deg, #355d35, #1d2d1d);
+      border-bottom: 3px solid #111611;
+    }
+
+    .pack-name {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.45rem;
+      line-height: 1.3;
+      word-break: break-word;
+      text-shadow: 2px 2px 0 #000;
+    }
+
+    .pack-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 18px;
+    }
+
+    .pack-description {
+      margin: 0 0 14px;
+      color: #e3e3e3;
+      line-height: 1.8;
+    }
+
+    .pack-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 4px 0 16px;
+    }
+
+    .info-item {
+      padding: 10px;
+      background: #151b15;
+      border: 2px solid #374837;
+    }
+
+    .info-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #97d897;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .info-value {
+      display: block;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .pack-points {
+      margin: 0 0 18px;
+      padding-left: 1.2em;
+      color: #dddddd;
+      line-height: 1.8;
+    }
+
+    .download-button {
+      display: block;
+      margin-top: auto;
+      padding: 13px 16px;
+      border: 3px solid #080a08;
+      background: #42d957;
+      box-shadow: 0 5px 0 #080a08;
+      color: #071107;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 900;
+      transition: 0.12s ease;
+    }
+
+    .download-button:hover {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #080a08;
+      filter: brightness(1.08);
+    }
+
+    .download-button:active {
+      transform: translateY(5px);
+      box-shadow: none;
+    }
+
+    .steps {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 10px;
+      padding: 14px;
+      background: #202820;
+      border: 2px solid #465846;
+      color: #e6e6e6;
+      line-height: 1.7;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      background: #42d957;
+      border: 3px solid #080a08;
+      color: #071107;
+      font-weight: 900;
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .history-table th,
+    .history-table td {
+      padding: 12px;
+      border: 2px solid #3d4a3d;
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .history-table th {
+      background: #253525;
+      color: #b8ffad;
+    }
+
+    .history-table td {
+      background: #171d17;
+      color: #e8e8e8;
+    }
+
+    .footer {
+      margin-top: 32px;
+      padding: 18px;
+      text-align: center;
+      color: #bdbdbd;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        padding: 16px 10px 36px;
+      }
+
+      .hero {
+        padding: 28px 16px;
+      }
+
+      .pack-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 18px;
+      }
+
+      .hero-link {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 460px) {
+      h1 {
+        font-size: 2.05rem;
+      }
+
+      .pack-info {
+        grid-template-columns: 1fr;
+      }
+
+      .steps li {
+        grid-template-columns: 38px 1fr;
+        padding: 12px;
+      }
+
+      .steps li::before {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <section class="hero">
+      <div class="hero-content">
+        <span class="site-label">Minecraft Java Edition Datapacks</span>
+        <h1>マイクラデータパック配布ページ</h1>
+        <p class="hero-text">
+          Minecraft Java Editionで遊べるデータパックを配布しています。
+          ダウンロードして、ワールド作成時に追加して遊んでください。
+        </p>
+
+        <div class="hero-links">
+          <a class="hero-link" href="#packs">データパックを見る</a>
+          <a class="hero-link" href="#install">導入方法を見る</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="packs">
+      <h2>配布中のデータパック</h2>
+
+      <div class="pack-grid">
+
+        <article class="pack-card">
+          <div class="pack-header">
+            <h3 class="pack-name">one_chest_skyblock</h3>
+          </div>
+
+          <div class="pack-body">
+            <p class="pack-description">
+              ひとつのチェストから始まる、シンプルなスカイブロック風データパックです。
+              小さな足場から、手に入るアイテムを使って少しずつ世界を広げていきます。
+              行商人の交易やモンスタートラップ製作の知識が前提になる難易度です。
+            </p>
+
+            <div class="pack-info">
+              <div class="info-item">
+                <span class="info-label">対応版</span>
+                <span class="info-value">Java Edition</span>
+              </div>
+
+              <div class="info-item">
+                <span class="info-label">対応バージョン</span>
+                <span class="info-value">26.1.2</span>
+              </div>
+
+              <div class="info-item">
+                <span class="info-label">形式</span>
+                <span class="info-value">ZIP</span>
+              </div>
+
+              <div class="info-item">
+                <span class="info-label">種類</span>
+                <span class="info-value">データパック</span>
+              </div>
+            </div>
+
+            <ul class="pack-points">
+              <li>チェストを使って進めるスカイブロック風の遊び</li>
+              <li>シンプルに遊びやすい基本版</li>
+            </ul>
+
+            <a class="download-button" href="downloads/one_chest_skyblock.zip" download>
+              one_chest_skyblock をダウンロード
+            </a>
+          </div>
+        </article>
+
+        <article class="pack-card">
+          <div class="pack-header">
+            <h3 class="pack-name">kind_one_chest_skyblock</h3>
+          </div>
+
+          <div class="pack-body">
+            <p class="pack-description">
+              one_chest_skyblockを、より遊びやすくしたやさしめ版のデータパックです。
+              初めて遊ぶ人や、のんびり進めたい人向けのスカイブロック風データパックです。
+            </p>
+
+            <div class="pack-info">
+              <div class="info-item">
+                <span class="info-label">対応版</span>
+                <span class="info-value">Java Edition</span>
+              </div>
+
+              <div class="info-item">
+                <span class="info-label">対応バージョン</span>
+                <span class="info-value">26.1.2</span>
+              </div>
+
+              <div class="info-item">
+                <span class="info-label">形式</span>
+                <span class="info-value">ZIP</span>
+              </div>
+
+              <div class="info-item">
+                <span class="info-label">種類</span>
+                <span class="info-value">データパック</span>
+              </div>
+            </div>
+
+            <ul class="pack-points">
+              <li>やさしめに遊べる調整版</li>
+              <li>のんびりスカイブロックを楽しみたい人向け</li>
+            </ul>
+
+            <a class="download-button" href="downloads/kind_one_chest_skyblock.zip" download>
+              kind_one_chest_skyblock をダウンロード
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section" id="install">
+      <h2>導入方法</h2>
+
+      <ol class="steps">
+        <li>Minecraft Java Editionを起動します。</li>
+        <li>「ワールド新規作成」を押します。</li>
+        <li>「その他の設定」タブから「データパック」を開きます。</li>
+        <li>ダウンロードしたZIPファイルを解凍して、解凍したフォルダをデータパック画面にドラッグ＆ドロップして追加します。</li>
+        <li>データパックを有効化して、ワールドを作成します。</li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <h2>注意事項</h2>
+
+      <p class="lead">
+        このページで配布しているデータパックは個人制作の非公式作品です。
+        Minecraft公式の作品ではありません。
+        導入や使用は自己責任でお願いします。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>更新履歴</h2>
+
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>バージョン</th>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>v1.0.0</td>
+            <td>one_chest_skyblock / kind_one_chest_skyblock を公開</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Minecraft Datapack 配布ページ<br>
+        © 小灘ゆき / Konadayuki
+      </p>
+    </footer>
+
+  </main>
+</body>
+</html>

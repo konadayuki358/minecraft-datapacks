@@ -35,13 +35,13 @@
     }
 
     .page {
-      width: min(1080px, 100%);
+      width: min(1120px, 100%);
       margin: 0 auto;
       padding: 24px 16px 48px;
     }
 
     .hero {
-      padding: 34px 22px;
+      padding: 36px 24px;
       margin-bottom: 24px;
       border: 3px solid #263b26;
       background:
@@ -88,7 +88,7 @@
 
     .hero-text {
       margin: 0;
-      max-width: 760px;
+      max-width: 780px;
       color: #e8ffe3;
       font-size: 1.05rem;
       line-height: 1.9;
@@ -132,7 +132,7 @@
       padding-bottom: 10px;
       border-bottom: 3px solid #4fd14f;
       color: #b8ffad;
-      font-size: 1.45rem;
+      font-size: 1.55rem;
       text-shadow: 2px 2px 0 #000;
     }
 
@@ -147,36 +147,126 @@
       color: #ffe8b8;
     }
 
+    /* カテゴリ入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .category-link {
+      display: block;
+      padding: 22px 18px;
+      text-decoration: none;
+      background: #202820;
+      border: 3px solid #465846;
+      box-shadow: 0 6px 0 #080a08;
+      transition: 0.12s ease;
+    }
+
+    .category-link:hover {
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 #080a08;
+      filter: brightness(1.08);
+    }
+
+    .category-icon {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 2rem;
+    }
+
+    .category-title {
+      display: block;
+      margin-bottom: 6px;
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .category-text {
+      display: block;
+      color: #cfd8cf;
+      line-height: 1.6;
+      font-size: 0.93rem;
+    }
+
+    /* カテゴリ見出し */
+    .category-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .category-heading-icon {
+      font-size: 1.55rem;
+    }
+
+    .category-subtext {
+      margin: -4px 0 18px;
+      color: #c7d3c7;
+      line-height: 1.8;
+    }
+
+    /* データパックカード */
     .pack-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
+      align-items: stretch;
     }
 
     .pack-card {
       display: flex;
       flex-direction: column;
-      min-height: 100%;
+      height: 100%;
       background: #202820;
       border: 3px solid #465846;
       box-shadow: 0 6px 0 #080a08;
-      overflow: hidden;
+      position: relative;
+      overflow: visible;
+    }
+
+    .pack-card:has(.old-versions[open]) {
+      z-index: 20;
     }
 
     .pack-header {
       padding: 18px;
-      background:
-        linear-gradient(135deg, #355d35, #1d2d1d);
+      background: linear-gradient(135deg, #355d35, #1d2d1d);
       border-bottom: 3px solid #111611;
+    }
+
+    .pack-header.world {
+      background: linear-gradient(135deg, #355d35, #1d2d1d);
+    }
+
+    .pack-header.clear {
+      background: linear-gradient(135deg, #76631f, #352d13);
+    }
+
+    .pack-header.battle {
+      background: linear-gradient(135deg, #6d2929, #351818);
     }
 
     .pack-name {
       margin: 0;
       color: #ffffff;
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       line-height: 1.3;
       word-break: break-word;
       text-shadow: 2px 2px 0 #000;
+    }
+
+    .pack-status {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 4px 8px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 0.8rem;
+      font-weight: 800;
     }
 
     .pack-body {
@@ -192,32 +282,28 @@
       line-height: 1.8;
     }
 
-    .pack-info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .version-line {
+      display: flex;
+      align-items: center;
       gap: 10px;
-      margin: 4px 0 16px;
-    }
-
-    .info-item {
-      padding: 10px;
+      margin: 4px 0 18px;
+      padding: 10px 12px;
       background: #151b15;
-      border: 2px solid #374837;
+      border-left: 4px solid #42d957;
+      color: #d8e5d8;
+      line-height: 1.5;
     }
 
-    .info-label {
-      display: block;
-      margin-bottom: 4px;
+    .version-label {
       color: #97d897;
-      font-size: 0.8rem;
-      font-weight: 700;
+      font-size: 0.85rem;
+      font-weight: 800;
     }
 
-    .info-value {
-      display: block;
+    .version-number {
       color: #ffffff;
-      font-size: 0.95rem;
-      font-weight: 800;
+      font-size: 1rem;
+      font-weight: 900;
     }
 
     .pack-points {
@@ -252,6 +338,85 @@
       box-shadow: none;
     }
 
+    .coming-soon {
+      display: block;
+      margin-top: auto;
+      padding: 13px 16px;
+      border: 3px solid #343a34;
+      background: #171b17;
+      color: #aeb6ae;
+      text-align: center;
+      font-weight: 900;
+    }
+
+    /* 過去バージョン */
+    .old-versions {
+      margin-top: 14px;
+      border: 2px solid #3b493b;
+      background: #151a15;
+      width: 100%;
+      position: relative;
+    }
+
+    .old-versions summary {
+      padding: 11px 13px;
+      cursor: pointer;
+      color: #d8ead5;
+      font-weight: 800;
+      user-select: none;
+      list-style-position: inside;
+    }
+
+    .old-versions summary:hover {
+      background: #1d251d;
+    }
+
+    .old-version-list {
+      display: none;
+      position: absolute;
+      top: calc(100% + 2px);
+      left: -2px;
+      right: -2px;
+      z-index: 30;
+      margin: 0;
+      padding: 8px 13px 13px;
+      list-style: none;
+      background: #151a15;
+      border: 2px solid #3b493b;
+      border-top: 0;
+      box-shadow: 0 7px 0 #080a08;
+    }
+
+    .old-versions[open] .old-version-list {
+      display: block;
+    }
+
+    .old-version-list li {
+      padding: 9px 0;
+      border-top: 1px solid #344034;
+      color: #c7cec7;
+      line-height: 1.6;
+    }
+
+    .old-version-list li:first-child {
+      border-top: 0;
+    }
+
+    .old-version-list a {
+      color: #aef1a5;
+      font-weight: 800;
+    }
+
+    .compatibility-note {
+      margin-top: 18px;
+      padding: 14px;
+      background: #241f14;
+      border: 2px solid #665a32;
+      color: #ffe2a8;
+      line-height: 1.8;
+    }
+
+    /* 導入方法 */
     .steps {
       margin: 0;
       padding: 0;
@@ -317,6 +482,16 @@
       line-height: 1.7;
     }
 
+    @media (max-width: 820px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pack-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 760px) {
       .page {
         padding: 16px 10px 36px;
@@ -326,12 +501,12 @@
         padding: 28px 16px;
       }
 
-      .pack-grid {
-        grid-template-columns: 1fr;
-      }
-
       .section {
         padding: 18px;
+      }
+
+      .old-version-list {
+        box-shadow: 0 5px 0 #080a08;
       }
 
       .hero-link {
@@ -343,10 +518,6 @@
     @media (max-width: 460px) {
       h1 {
         font-size: 2.05rem;
-      }
-
-      .pack-info {
-        grid-template-columns: 1fr;
       }
 
       .steps li {
@@ -369,26 +540,77 @@
       <div class="hero-content">
         <span class="site-label">Minecraft Java Edition Datapacks</span>
         <h1>マイクラデータパック配布ページ</h1>
+
         <p class="hero-text">
-          Minecraft Java Editionで遊べるデータパックを配布しています。
-          ダウンロードして、ワールド作成時に追加して遊んでください。
+          Minecraft Java Editionで遊べるデータパックを配布しています。<br>
+          世界を変えたり、整地したり、ちょっと変わった敵と戦ったり。<br>
+          気になるデータパックを見つけて、自由に遊んでみてください！
         </p>
 
         <div class="hero-links">
-          <a class="hero-link" href="#packs">データパックを見る</a>
+          <a class="hero-link" href="#categories">データパックを探す</a>
           <a class="hero-link" href="#install">導入方法を見る</a>
         </div>
       </div>
     </section>
 
-    <section class="section" id="packs">
-      <h2>配布中のデータパック</h2>
+    <section class="section" id="categories">
+      <h2>今日は何して遊ぶ？</h2>
+
+      <p class="lead">
+        データパックを3つのカテゴリに分けています。
+        気になる遊び方を選んでください。
+      </p>
+
+      <div class="category-grid">
+        <a class="category-link" href="#world">
+          <span class="category-icon">🌍</span>
+          <span class="category-title">ワールド</span>
+          <span class="category-text">
+            スカイブロックなど、世界そのものや遊び方を変えるデータパック。
+          </span>
+        </a>
+
+        <a class="category-link" href="#clear">
+          <span class="category-icon">⛏️</span>
+          <span class="category-title">整地</span>
+          <span class="category-text">
+            大規模整地や建築準備をラクにする、便利系データパック。
+          </span>
+        </a>
+
+        <a class="category-link" href="#battle">
+          <span class="category-icon">⚔️</span>
+          <span class="category-title">戦闘</span>
+          <span class="category-text">
+            ストーカーやレイドなど、戦いや緊張感を追加するデータパック。
+          </span>
+        </a>
+      </div>
+
+      <div class="compatibility-note">
+        ⚠️ Minecraftのアップデートによって、古いデータパックが正常に動かなくなる場合があります。<br>
+        対応バージョンを確認して使ってね。新しいバージョンで動かなかったらごめんね！
+      </div>
+    </section>
+
+    <!-- ワールド -->
+    <section class="section" id="world">
+      <h2 class="category-heading">
+        <span class="category-heading-icon">🌍</span>
+        ワールド
+      </h2>
+
+      <p class="category-subtext">
+        スカイブロックなど、いつものMinecraftとは少し違う世界で遊ぶデータパックです。
+      </p>
 
       <div class="pack-grid">
 
         <article class="pack-card">
-          <div class="pack-header">
+          <div class="pack-header world">
             <h3 class="pack-name">one_chest_skyblock</h3>
+            <span class="pack-status">配布中</span>
           </div>
 
           <div class="pack-body">
@@ -398,26 +620,9 @@
               行商人の交易やモンスタートラップ製作の知識が前提になる難易度です。
             </p>
 
-            <div class="pack-info">
-              <div class="info-item">
-                <span class="info-label">対応版</span>
-                <span class="info-value">Java Edition</span>
-              </div>
-
-              <div class="info-item">
-                <span class="info-label">対応バージョン</span>
-                <span class="info-value">26.1.2</span>
-              </div>
-
-              <div class="info-item">
-                <span class="info-label">形式</span>
-                <span class="info-value">ZIP</span>
-              </div>
-
-              <div class="info-item">
-                <span class="info-label">種類</span>
-                <span class="info-value">データパック</span>
-              </div>
+            <div class="version-line">
+              <span class="version-label">対応バージョン</span>
+              <span class="version-number">26.2</span>
             </div>
 
             <ul class="pack-points">
@@ -425,15 +630,27 @@
               <li>シンプルに遊びやすい基本版</li>
             </ul>
 
-            <a class="download-button" href="downloads/one_chest_skyblock.zip" download>
-              one_chest_skyblock をダウンロード
+            <a class="download-button" href="downloads/one_chest_skyblock_26.2.zip" download>
+              最新版をダウンロード
             </a>
+
+            <details class="old-versions">
+              <summary>過去バージョンを見る</summary>
+              <ul class="old-version-list">
+                <li>
+                  <a href="downloads/one_chest_skyblock_26.1.2.zip" download>
+                    26.1.2 をダウンロード
+                  </a>
+                </li>
+              </ul>
+            </details>
           </div>
         </article>
 
         <article class="pack-card">
-          <div class="pack-header">
+          <div class="pack-header world">
             <h3 class="pack-name">kind_one_chest_skyblock</h3>
+            <span class="pack-status">配布中</span>
           </div>
 
           <div class="pack-body">
@@ -442,26 +659,9 @@
               初めて遊ぶ人や、のんびり進めたい人向けのスカイブロック風データパックです。
             </p>
 
-            <div class="pack-info">
-              <div class="info-item">
-                <span class="info-label">対応版</span>
-                <span class="info-value">Java Edition</span>
-              </div>
-
-              <div class="info-item">
-                <span class="info-label">対応バージョン</span>
-                <span class="info-value">26.1.2</span>
-              </div>
-
-              <div class="info-item">
-                <span class="info-label">形式</span>
-                <span class="info-value">ZIP</span>
-              </div>
-
-              <div class="info-item">
-                <span class="info-label">種類</span>
-                <span class="info-value">データパック</span>
-              </div>
+            <div class="version-line">
+              <span class="version-label">対応バージョン</span>
+              <span class="version-number">26.2</span>
             </div>
 
             <ul class="pack-points">
@@ -469,9 +669,131 @@
               <li>のんびりスカイブロックを楽しみたい人向け</li>
             </ul>
 
-            <a class="download-button" href="downloads/kind_one_chest_skyblock.zip" download>
-              kind_one_chest_skyblock をダウンロード
+            <a class="download-button" href="downloads/kind_one_chest_skyblock_26.2.zip" download>
+              最新版をダウンロード
             </a>
+
+            <details class="old-versions">
+              <summary>過去バージョンを見る</summary>
+              <ul class="old-version-list">
+                <li>
+                  <a href="downloads/kind_one_chest_skyblock_26.1.2.zip" download>
+                    26.1.2 をダウンロード
+                  </a>
+                </li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 整地 -->
+    <section class="section" id="clear">
+      <h2 class="category-heading">
+        <span class="category-heading-icon">⛏️</span>
+        整地
+      </h2>
+
+      <p class="category-subtext">
+        広い範囲の整地や建築準備を、いつもより豪快に進めたい人向けです。
+      </p>
+
+      <div class="pack-grid">
+
+        <article class="pack-card">
+          <div class="pack-header clear">
+            <h3 class="pack-name">金ツール大規模整地データパック</h3>
+            <span class="pack-status">配布中</span>
+          </div>
+
+          <div class="pack-body">
+            <p class="pack-description">
+              金のツールを使って、大規模な整地を行えるデータパックです。
+              採掘、伐採、地形整理などを豪快に進めたいときに。
+            </p>
+
+            <div class="version-line">
+              <span class="version-label">対応バージョン</span>
+              <span class="version-number">26.2</span>
+            </div>
+
+            <ul class="pack-points">
+              <li>金ツールごとに特殊な整地効果</li>
+              <li>広い範囲をまとめて整理</li>
+              <li>建築前の下準備にも便利</li>
+            </ul>
+
+            <a class="download-button" href="downloads/gold_tool_flattening_26.2.zip" download>
+              最新版をダウンロード
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 戦闘 -->
+    <section class="section" id="battle">
+      <h2 class="category-heading">
+        <span class="category-heading-icon">⚔️</span>
+        戦闘
+      </h2>
+
+      <p class="category-subtext">
+        敵やイベントを追加して、いつものサバイバルに刺激を加えるデータパックです。
+      </p>
+
+      <div class="pack-grid">
+
+        <article class="pack-card">
+          <div class="pack-header battle">
+            <h3 class="pack-name">ストーカーデータパック</h3>
+            <span class="pack-status">配布中</span>
+          </div>
+
+          <div class="pack-body">
+            <p class="pack-description">
+              プレイヤーをどこまでも追ってくるストーカーを追加するデータパックです。
+              のんびりしている暇はないかも……？
+            </p>
+
+            <div class="version-line">
+              <span class="version-label">対応バージョン</span>
+              <span class="version-number">26.2</span>
+            </div>
+
+            <ul class="pack-points">
+              <li>しつこく追跡してくる敵を追加</li>
+              <li>遠く離れても追いついてくる</li>
+              <li>サバイバルに緊張感を追加</li>
+            </ul>
+
+            <a class="download-button" href="downloads/stalker_datapack_26.2.zip" download>
+              最新版をダウンロード
+            </a>
+          </div>
+        </article>
+
+        <article class="pack-card">
+          <div class="pack-header battle">
+            <h3 class="pack-name">レイド追加データパック</h3>
+            <span class="pack-status">準備中</span>
+          </div>
+
+          <div class="pack-body">
+            <p class="pack-description">
+              戦闘や襲撃をもっと楽しみたい人向けのデータパック。
+              詳細は公開時に追加予定です。
+            </p>
+
+            <ul class="pack-points">
+              <li>戦闘イベントを追加</li>
+              <li>いつものサバイバルに新しい刺激</li>
+            </ul>
+
+            <span class="coming-soon">公開準備中！</span>
           </div>
         </article>
 
@@ -485,7 +807,7 @@
         <li>Minecraft Java Editionを起動します。</li>
         <li>「ワールド新規作成」を押します。</li>
         <li>「その他の設定」タブから「データパック」を開きます。</li>
-        <li>ダウンロードしたZIPファイルを解凍して、解凍したフォルダをデータパック画面にドラッグ＆ドロップして追加します。</li>
+        <li>ダウンロードしたZIPファイルをデータパック画面にドラッグ＆ドロップして追加します。</li>
         <li>データパックを有効化して、ワールドを作成します。</li>
       </ol>
     </section>
@@ -500,7 +822,13 @@
       </p>
 
       <p class="lead warning-lead">
+        Minecraftのアップデートによって、正常に動作しなくなる場合があります。
+        各データパックの対応バージョンを確認して使用してください。
+      </p>
+
+      <p class="lead warning-lead">
         スカイブロック系の性質上、重要アイテムを失うと攻略不能になる場合があります。
+        また、整地系・戦闘系データパックではワールドへ大きな変更が加わる場合があります。
         こまめにワールドのバックアップを取ることをおすすめします。
       </p>
     </section>
@@ -515,7 +843,18 @@
             <th>内容</th>
           </tr>
         </thead>
+
         <tbody>
+          <tr>
+            <td>v2.1.0</td>
+            <td>26.2対応版を追加。26.1.2版を過去バージョンとして公開。金ツール整地・ストーカーデータパックを追加</td>
+          </tr>
+
+          <tr>
+            <td>v2.0.0</td>
+            <td>ページを「ワールド・整地・戦闘」の3カテゴリ構成にリニューアル</td>
+          </tr>
+
           <tr>
             <td>v1.0.0</td>
             <td>one_chest_skyblock / kind_one_chest_skyblock を公開</td>
@@ -534,4 +873,3 @@
   </main>
 </body>
 </html>
-    
